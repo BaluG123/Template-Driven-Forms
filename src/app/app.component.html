@@ -8,11 +8,15 @@
 </head>
 <body>
   <form #basicForm="ngForm" (ngSubmit)="loginUser(basicForm.value)">
-    <input type="text" name="firstname" #fn placeholder="enter your first name " ngModel><br><br>
-    <input type="text" name="lastname" #ln placeholder="enter your last name " ngModel> <br><br>
-    <input type="email" name="email" #em placeholder="enter your email id" ngModel><br><br>
-    <input type="password" name="password" #pd placeholder="enter your password" ngModel><br><br>
-    <button>register</button>
+    <input type="text" name="firstname" #fn="ngModel" ngModel required placeholder="enter your first name "><br>
+    <span *ngIf="fn.invalid && fn.touched">please enter first name</span><br>
+    <input type="text" name="lastname" #ln="ngModel" ngModel required placeholder="enter your last name "> <br>
+    <span *ngIf="ln.invalid && ln.touched"> please enter lastname</span><br>
+    <input type="email" name="email" #em="ngModel" required ngModel placeholder="enter your email id"><br>
+    <span *ngIf="em.invalid && em.touched">please enter valid email</span><br>
+    <input type="password" name="password" #pd="ngModel" required ngModel placeholder="enter your password"><br>
+    <span *ngIf="pd.invalid && pd.touched">please enter password</span><br>
+    <button [disabled]="basicForm.invalid">register</button>
   </form>
   <p>firstName:{{userData.firstname}}</p>
   <p>lastName:{{userData.lastname}}</p>
